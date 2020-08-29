@@ -1,7 +1,9 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
+const path = require('path')
 const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload')
 const fs = require('fs');
 var mysql = require('mysql')
 const Sequelize = require('sequelize');
@@ -9,6 +11,8 @@ const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload());
 
 const sequelize = new Sequelize('shopping_cart', 'root', '', {
   host: 'localhost',
@@ -173,6 +177,71 @@ app.post('/logContactInfo', function(req, res){
     })
   })
 })
+
+app.post('/createproduct', function(req, res){
+
+  if (!req.files)
+      return res.status(400).send('No files were uploaded.');
+
+  var file = req.files.productImg;
+  var img_name = file.name;
+
+     if(file.mimetype == "image/jpeg" || file.mimetype == "image/png"|| file.mimetype == "image/gif" || file.mimetype == "image/webp" ){
+                               
+            file.mv('public/images/product_images/'+file.name, function(err) {
+                           
+              if (err)
+                return res.status(500).send(err);                  
+                var sql = 'INSERT INTO products SET discount=?, price=?, productCategory=?, productName=?, productSubCategory=?, productType=?, quantityAvailable=?, size=?, productImg=?';
+                connection.query(sql, [
+                  req.body.discount, req.body.price, req.body.productCategory, req.body.productName, req.body.productSubCategory, req.body.productType,
+                  req.body.quantityAvailable, req.body.size, img_name
+                ], function(error, results, fields) {
+                  if(error) throw error;
+                  res.status(200).json({
+                    status: 'success',
+                    message: 'Product Created Successfully'
+                  })
+                })
+           });
+        } else {
+          message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
+          res.render('index.ejs',{message: message});
+        }
+})
+
+app.get('/customerleads', verifyToken, function(req, res){
+    var sql = 'SELECT * FROM usercontacts';
+
+    connection.query(sql, function (err, rows, fields) {
+      if(err) {
+        connection.end();
+        return console.log(err);
+      }
+
+      if (rows.length) {
+        var leads = rows;
+        res.status(200).json(leads);
+      }  
+    })
+});
+
+app.get('/getproducts', verifyToken, function(req, res){
+  var sql = 'SELECT * FROM products';
+
+  connection.query(sql, function (err, rows, fields) {
+    if(err) {
+      connection.end();
+      return console.log(err);
+    }
+
+    if (rows.length) {
+      var leads = rows;
+      res.status(200).json(leads);
+    }  
+  })
+});
+
 
 // MIDDLEWARE
 function verifyToken (req, res, next) {

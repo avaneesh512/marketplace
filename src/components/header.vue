@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="bgcolor-primary py-2 header-fixed">
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-between">
+            <div class="container h-100">
+                <div class="d-flex align-items-center justify-content-between h-100">
                     <div class="d-flex align-items-center">
                         <router-link to="/" class="no-hover text-white">
-                            <div class="f-30">
-                               Market place
+                            <div class="f-30 d-flex align-items-center">                                
+                                <img src="../assets/site_logo.png" class="img-fluid" style="max-height: 40px;" />
                             </div>
                         </router-link>
                     </div>
@@ -29,6 +29,11 @@
                         <router-link to="/contact-us" class="no-hover text-white d-inline-block mx-3">
                             <div class="">
                                 <span class="">Contact Us</span>
+                            </div>
+                        </router-link>
+                        <router-link to="/admin" class="no-hover text-white d-inline-block mx-3" v-if="loggedIn">
+                            <div class="">
+                                <span class="">Admin</span>
                             </div>
                         </router-link>
                     </div>
@@ -105,10 +110,12 @@
         width: 100%;
         left: 0;
     }
+
     .header-fixed {
-    position: fixed !important;
-    top: 0;
-    width: 100%;
-    z-index: 101;
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        z-index: 101;
+        height: 61px;
     }
 </style>

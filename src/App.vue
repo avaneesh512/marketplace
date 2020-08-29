@@ -2,14 +2,17 @@
   <div id="app">
     <header-bar />
     <router-view class="app-body position-relative primary-body" />    
+    <footer-bar />
   </div>
 </template>
 
 <script>
 import HeaderBar from './components/header';
+import FooterBar from './components/footer';
 export default {
  components: { 
-  HeaderBar
+  HeaderBar,
+  FooterBar
   }
 };
 </script>
@@ -39,6 +42,11 @@ export default {
     padding: 5px;
     border-radius: 5px;
 }
+.primary-body {
+  min-height: calc(100vh - 126px);
+}
 @import './assets/styles.less';
-@import'~bootstrap/dist/css/bootstrap.css'
+@import'~bootstrap/dist/css/bootstrap.css';
+@import '../node_modules/slick-carousel/slick/slick.css';
+@import './css/slick.less';
 </style>

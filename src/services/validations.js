@@ -50,9 +50,29 @@ export class Validations {
                 return true
             }
         }
-    }
+	}
+	checkFileEmpty(file) {				  
+		if(file.type == "image/jpeg" || file.type == "image/png" || file.type == "image/gif" || file.type == "image/webp") {
+			return false;
+		}
+		return true;
+	}
+
+	checkDropDownEmpty(value) {
+		debugger;
+		if (value === '' || !value) {
+			return true;
+		} else if (value && value.trim() === '') {
+			return true;
+		} else if (value.includes('select')) {
+			return true;
+		}
+		return false;
+	}
+
     checkError(errordetails) {
 		if (errordetails === '') return false;
 		return Object.keys(errordetails).every((key) => !errordetails[key]) ? true : false;
 	}
+
 }

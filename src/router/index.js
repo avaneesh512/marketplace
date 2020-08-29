@@ -8,6 +8,7 @@ import contactus from "../views/contact-us.vue";
 import orders from "../views/orders.vue";
 import products from "../views/products.vue";
 import profile from "../views/profile.vue";
+import admin from "../views/admin.vue";
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,12 @@ const routes = [
     path: "/products",
     name: "products",
     component: products,    
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: admin,
+    meta: { requiresAuth: true }
   }
 
 ];

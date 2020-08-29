@@ -1,4 +1,4 @@
-# shopping_cart
+# marketplace
 
 ## Project setup
 ```
@@ -28,5 +28,11 @@ server side expressjs - node server
 database - mysql
 http://localhost:81/phpmyadmin/sql.php?server=1&db=shopping_cart&table=usercontacts&pos=0
 
-marketplace
+
+### creating banners
+https://app.bannersnack.com/banner-creator/editor/choose-size/
+
+### barcode generator
+https://www.qr-code-generator.com/solutions/static-url-qr-code/
+
 
