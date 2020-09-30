@@ -23,8 +23,7 @@
               </span>
             </div>
             <div class="">
-              <a href="#" class="no-hover bgcolor-cart text-white d-block text-center py-2 my-3">Add to Cart</a>
-              <a href="#" class="no-hover bgcolor-buy text-white d-block text-center py-2 my-3">Buy Now</a>
+              <a href="#" class="no-hover bgcolor-primary text-white d-block text-center py-2 my-3">Add to Cart</a>              
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
   <div class="dashboard container-fluid">
      <div class="row">
        <div class="col-12 p-0">
-        <carousel :per-page="1" :mouse-drag="true" :loop="true" :autoplay="3000">
+        <carousel :per-page="1" :mouse-drag="true" :loop="true" :autoplay="true">
           <slide v-for="banner in bannerData" :key="banner.imgId">
             <a href="#"><img :src='require(`../assets/home_banners/${banner.imgUrl}`)' alt="" class="w-100"></a>    
           </slide>
